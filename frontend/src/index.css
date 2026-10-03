@@ -1,7 +1,7 @@
 :root {
   font-family: Arial, Helvetica, sans-serif;
-  color: #17364d;
-  background: #eb641e;
+  color: #173e5c;
+  background: #205278;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -26,6 +26,10 @@ body {
   min-width: 320px;
 }
 
+#root {
+  min-height: 100svh;
+}
+
 a {
   color: var(--blue);
 }
@@ -39,6 +43,16 @@ textarea {
 button,
 .button {
   cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+:focus-visible {
+  outline: 3px solid #173e5c;
+  outline-offset: 4px;
 }
 
 .button {
@@ -62,17 +76,7 @@ button,
   transform: translateY(-2px);
 }
 
-button:disabled {
-  opacity: 0.6;
-  cursor: wait;
-}
-
-:focus-visible {
-  outline: 3px solid #111827;
-  outline-offset: 5px;
-}
-
-/* Apresentação */
+/* Página inicial */
 
 .hero {
   position: relative;
@@ -148,8 +152,6 @@ button:disabled {
   box-shadow: 0 7px 0 rgb(10 34 51 / 16%);
 }
 
-/* Linhas que conectam as ilustrações */
-
 .hero-lines {
   position: absolute;
   inset: 0;
@@ -173,8 +175,6 @@ button:disabled {
 .line-peach {
   stroke: var(--peach);
 }
-
-/* Currículos nas bordas */
 
 .resume-decoration {
   position: absolute;
@@ -308,8 +308,6 @@ button:disabled {
   transform: rotate(25deg) translateY(5px);
 }
 
-/* Transição para a listagem */
-
 .scroll-cue {
   position: absolute;
   bottom: 34px;
@@ -360,7 +358,7 @@ button:disabled {
   fill: var(--orange);
 }
 
-/* Candidatos */
+/* Listagem */
 
 #candidatos {
   scroll-margin-top: 16px;
@@ -591,115 +589,20 @@ button:disabled {
   margin-top: 0;
 }
 
-.sr-only {
+.sr-only,
+.candidate-registration__sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
 
-/* Responsividade */
-
-@media (max-width: 1100px) {
-  .resume-decoration {
-    width: 150px;
-    transform: scale(0.8);
-  }
-
-  .resume-decoration-left {
-    left: 5px;
-    transform: scale(0.8) rotate(-12deg);
-    transform-origin: left center;
-  }
-
-  .resume-decoration-right {
-    right: 5px;
-    transform: scale(0.8) rotate(10deg);
-    transform-origin: right center;
-  }
-
-  .hero-content h1 {
-    max-width: 65%;
-  }
-}
-
-@media (max-width: 700px) {
-  .hero-art {
-    height: clamp(170px, 28svh, 250px);
-  }
-
-  .hero-stage {
-    min-height: 420px;
-    padding: 44px 20px 100px;
-  }
-
-  .hero-content h1 {
-    max-width: 100%;
-    font-size: clamp(34px, 8vw, 48px);
-    letter-spacing: -1px;
-  }
-
-  .hero-icon {
-    width: 90px;
-  }
-
-  .button-primary {
-    min-width: 230px;
-    font-size: 16px;
-  }
-
-  .resume-decoration {
-    display: none;
-  }
-
-  .hero-lines {
-    opacity: 0.35;
-  }
-
-  .candidate-grid {
-    grid-template-columns: minmax(0, 340px);
-  }
-
-  .section-heading h1 {
-    gap: 12px;
-  }
-
-  .section-heading h1::before,
-  .section-heading h1::after {
-    width: 18px;
-  }
-
-  .internal-page {
-    padding: 28px 16px;
-  }
-
-  .content-page {
-    padding: 24px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .button,
-  .candidate-card {
-    transition: none;
-  }
-
-  .button:hover,
-  .candidate-card:hover {
-    transform: none;
-  }
-}
-
-/* Cadastro de candidato */
+/* Painel compartilhado entre cadastro e detalhes */
 
 .candidate-registration {
   min-height: 100svh;
@@ -726,6 +629,10 @@ button:disabled {
 
 .candidate-registration__back:hover {
   color: var(--peach);
+}
+
+.candidate-registration__back:focus-visible {
+  outline-color: var(--cream);
 }
 
 .candidate-registration__back svg {
@@ -775,6 +682,7 @@ button:disabled {
   font-size: clamp(30px, 2.5vw, 44px);
   line-height: 1.2;
   letter-spacing: -0.8px;
+  overflow-wrap: anywhere;
 }
 
 .candidate-registration__header p {
@@ -791,6 +699,8 @@ button:disabled {
   flex-shrink: 0;
   object-fit: contain;
 }
+
+/* Formulário */
 
 .candidate-registration__form {
   display: flex;
@@ -915,6 +825,8 @@ button:disabled {
   line-height: 1.5;
 }
 
+/* Ações e erros */
+
 .candidate-registration__actions {
   display: flex;
   align-items: center;
@@ -929,6 +841,7 @@ button:disabled {
   margin: 0;
   color: #526578;
   font-size: 13px;
+  line-height: 1.5;
 }
 
 .candidate-registration__buttons {
@@ -992,108 +905,193 @@ button:disabled {
   line-height: 1.6;
 }
 
-.candidate-registration__sr-only {
+/* Importação compacta de currículo */
+
+.resume-import {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  align-items: center;
+  gap: 16px 28px;
+  margin-top: 20px;
+  padding: 16px 24px;
+  border: 1px dashed #f2a36d;
+  border-radius: 14px;
+  background: #fff2e6;
+}
+
+.resume-import__intro {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.resume-import__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #ffe6d1;
+  color: #bd4b1c;
+}
+
+.resume-import__icon svg {
+  display: block;
+  width: 34px;
+  height: 34px;
+}
+
+.resume-import__copy {
+  min-width: 0;
+}
+
+.resume-import__heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.resume-import__heading h2 {
+  margin: 0;
+  color: var(--blue-dark);
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.resume-import__badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #ffe0c5;
+  color: #91451e;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.resume-import__copy p {
+  margin: 7px 0 0;
+  color: #526578;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.resume-import__control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.resume-import__picker {
+  position: relative;
+  width: 100%;
+}
+
+.resume-import__input {
   position: absolute;
   width: 1px;
   height: 1px;
   padding: 0;
+  margin: -1px;
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
 
-@media (max-width: 1000px) {
-  .candidate-registration__panel {
-    padding: 32px;
-  }
-
-  .candidate-registration__columns {
-    gap: 28px;
-  }
-
-  .candidate-registration__summary {
-    padding-left: 24px;
-  }
-
-  .candidate-registration__fields {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+.resume-import__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid #ffb477;
+  border-radius: 10px;
+  background: var(--peach);
+  color: var(--blue-dark);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
 }
 
-@media (max-width: 720px) {
-  .candidate-registration {
-    padding: 18px 16px 24px;
-  }
-
-  .candidate-registration__panel {
-    min-height: auto;
-    margin-top: 24px;
-    padding: 26px 22px;
-    border-radius: 20px;
-  }
-
-  .candidate-registration__header {
-    align-items: flex-start;
-    gap: 14px;
-  }
-
-  .candidate-registration__illustration {
-    width: 64px;
-    height: 64px;
-  }
-
-  .candidate-registration__header h1 {
-    font-size: 30px;
-  }
-
-  .candidate-registration__columns {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .candidate-registration__summary {
-    padding: 26px 0 0;
-    border-top: 1px solid #e3ddd5;
-    border-left: 0;
-  }
-
-  .candidate-registration__summary textarea {
-    min-height: 220px;
-  }
-
-  .candidate-registration__actions {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .candidate-registration__buttons {
-    width: 100%;
-  }
-
-  .candidate-registration__cancel,
-  .candidate-registration__save {
-    flex: 1;
-    min-width: 0;
-    padding-inline: 14px;
-  }
+.resume-import__button svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
 }
 
-@media (max-width: 400px) {
-  .candidate-registration__illustration {
-    width: 48px;
-    height: 48px;
-  }
-
-  .candidate-registration__buttons {
-    align-items: stretch;
-    flex-direction: column-reverse;
-  }
+.resume-import__input:not(:disabled)+.resume-import__button:hover {
+  border-color: #ffad69;
+  background: #ffad69;
 }
 
-/* Detalhes do candidato: reutiliza o painel do cadastro */
+.resume-import__input:focus-visible+.resume-import__button {
+  outline: 3px solid var(--blue-dark);
+  outline-offset: 4px;
+}
+
+.resume-import__input:disabled+.resume-import__button {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.resume-import__hint {
+  color: #526578;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.resume-import__filename {
+  width: 100%;
+  color: var(--blue-dark);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.resume-import__status,
+.resume-import__feedback,
+.resume-import>.candidate-registration__error {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.resume-import__status {
+  padding-top: 12px;
+  border-top: 1px solid #efd6c1;
+  color: var(--blue-dark);
+  font-size: 13px;
+}
+
+.resume-import__feedback {
+  padding: 12px 16px;
+  border: 1px solid #cbdbe6;
+  border-radius: 10px;
+  background: #eaf1f6;
+  color: var(--blue-dark);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.resume-import__feedback ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.resume-import__feedback li+li {
+  margin-top: 4px;
+}
+
+/* Detalhes do candidato */
 
 .candidate-details__icon {
   width: clamp(80px, 8vw, 130px);
@@ -1206,32 +1204,142 @@ button:disabled {
   margin: 0 0 20px;
 }
 
-@media (max-width: 1000px) {
-  .candidate-details__grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+/* Responsividade */
+
+@media (max-width: 1100px) {
+  .resume-decoration-left {
+    left: 5px;
+    transform: scale(0.8) rotate(-12deg);
+    transform-origin: left center;
   }
 
+  .resume-decoration-right {
+    right: 5px;
+    transform: scale(0.8) rotate(10deg);
+    transform-origin: right center;
+  }
+
+  .hero-content h1 {
+    max-width: 65%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .candidate-registration__panel {
+    padding: 32px;
+  }
+
+  .candidate-registration__columns,
   .candidate-details__content {
     gap: 28px;
   }
 
+  .candidate-registration__summary,
   .candidate-details__summary {
     padding-left: 24px;
+  }
+
+  .candidate-registration__fields,
+  .candidate-details__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
 @media (max-width: 720px) {
+  .candidate-registration {
+    padding: 18px 16px 24px;
+  }
+
+  .candidate-registration__panel {
+    min-height: auto;
+    margin-top: 24px;
+    padding: 26px 22px;
+    border-radius: 20px;
+  }
+
+  .candidate-registration__header {
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .candidate-registration__header h1 {
+    font-size: 30px;
+  }
+
+  .candidate-registration .registration-illustration {
+    width: 80px;
+    height: 80px;
+  }
+
+  .candidate-registration__columns,
   .candidate-details__content {
     grid-template-columns: 1fr;
     gap: 32px;
-    padding-top: 26px;
   }
 
+  .candidate-registration__summary,
   .candidate-details__summary {
     padding: 26px 0 0;
     border-top: 1px solid #e3ddd5;
     border-left: 0;
+  }
+
+  .candidate-registration__summary textarea {
+    min-height: 220px;
+  }
+
+  .candidate-registration__actions {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .candidate-registration__buttons {
+    width: 100%;
+  }
+
+  .candidate-registration__cancel,
+  .candidate-registration__save {
+    flex: 1;
+    min-width: 0;
+    padding-inline: 14px;
+  }
+
+  .resume-import {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .resume-import__intro {
+    gap: 12px;
+  }
+
+  .resume-import__icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .resume-import__heading h2 {
+    font-size: 17px;
+  }
+
+  .resume-import__control {
+    align-items: flex-start;
+    padding-left: 58px;
+  }
+
+  .resume-import__picker {
+    max-width: 220px;
+  }
+
+  .resume-import__filename {
+    text-align: left;
+  }
+
+  .candidate-details__content {
+    padding-top: 26px;
   }
 
   .candidate-details__summary-text {
@@ -1241,5 +1349,167 @@ button:disabled {
   .candidate-details__icon {
     width: 64px;
     height: 64px;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero-art {
+    height: clamp(170px, 28svh, 250px);
+  }
+
+  .hero-stage {
+    min-height: 420px;
+    padding: 44px 20px 100px;
+  }
+
+  .hero-content h1 {
+    max-width: 100%;
+    font-size: clamp(34px, 8vw, 48px);
+    letter-spacing: -1px;
+  }
+
+  .hero-icon {
+    width: 90px;
+  }
+
+  .button-primary {
+    min-width: 230px;
+    font-size: 16px;
+  }
+
+  .resume-decoration {
+    display: none;
+  }
+
+  .hero-lines {
+    opacity: 0.35;
+  }
+
+  .candidate-grid {
+    grid-template-columns: minmax(0, 340px);
+  }
+
+  .section-heading h1 {
+    gap: 12px;
+  }
+
+  .section-heading h1::before,
+  .section-heading h1::after {
+    width: 18px;
+  }
+
+  .internal-page {
+    padding: 28px 16px;
+  }
+
+  .content-page {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 400px) {
+  .candidate-registration .registration-illustration {
+    width: 60px;
+    height: 60px;
+  }
+
+  .candidate-registration__buttons {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .resume-import__control {
+    padding-left: 0;
+  }
+
+  .resume-import__picker {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .button,
+  .candidate-card {
+    transition: none;
+  }
+
+  .button:hover,
+  .candidate-card:hover {
+    transform: none;
+  }
+}
+
+/* Mesmo tamanho e posição para cadastro e detalhes */
+
+.candidate-registration {
+  padding: 16px 24px 24px;
+}
+
+.candidate-registration__panel {
+  width: 100%;
+  max-width: 1700px;
+  min-height: calc(100svh - 94px);
+  margin: 18px auto 0;
+  padding: 28px 40px;
+}
+
+.candidate-registration__header {
+  min-height: 120px;
+  padding-bottom: 18px;
+}
+
+.candidate-registration .registration-illustration,
+.candidate-details__icon {
+  width: 120px;
+  height: 120px;
+}
+
+/* Espaçamento interno do cadastro */
+
+.candidate-registration__form {
+  gap: 20px;
+  padding-top: 24px;
+}
+
+.candidate-registration__fields {
+  gap: 20px 22px;
+  margin-top: 20px;
+}
+
+.candidate-registration__summary textarea {
+  min-height: 240px;
+}
+
+.candidate-registration__actions {
+  padding-top: 18px;
+}
+
+@media (max-width: 720px) {
+  .candidate-registration {
+    padding: 16px;
+  }
+
+  .candidate-registration__panel {
+    min-height: calc(100svh - 84px);
+    margin-top: 16px;
+    padding: 24px 20px;
+  }
+
+  .candidate-registration__header {
+    min-height: auto;
+  }
+
+  .candidate-registration .registration-illustration,
+  .candidate-details__icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .candidate-registration__summary textarea {
+    min-height: 180px;
   }
 }

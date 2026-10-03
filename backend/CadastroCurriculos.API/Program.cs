@@ -1,5 +1,6 @@
 using CadastroCurriculos.API.Data;
 using Microsoft.EntityFrameworkCore;
+using CadastroCurriculos.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,8 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+
+builder.Services.AddScoped<ExtracaoCurriculoService>();
 
 var app = builder.Build();
 
