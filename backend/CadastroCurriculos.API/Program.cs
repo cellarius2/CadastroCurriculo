@@ -1,15 +1,27 @@
+using CadastroCurriculos.API.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Registra os controllers da API.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Configura a documentação Swagger.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configura o Entity Framework para usar SQL Server.
+var connectionString = builder.Configuration
+    .GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException(
+        "A conexão DefaultConnection não foi configurada.");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Disponibiliza o Swagger no ambiente de desenvolvimento.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
