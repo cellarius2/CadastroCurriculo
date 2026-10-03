@@ -1,0 +1,20 @@
+export interface CandidatoResumo {
+    id: number;
+    nomeCompleto: string;
+    email: string;
+    telefone: string | null;
+    areaInteresse: string | null;
+    criadoEm: string;
+}
+
+export interface Candidato extends CandidatoResumo {
+    resumoProfissional: string | null;
+}
+
+export interface CriarCandidatoRequest {
+    nomeCompleto: string;
+    email: string;
+    telefone?: string;
+    areaInteresse?: string;
+    resumoProfissional?: string;
+}
