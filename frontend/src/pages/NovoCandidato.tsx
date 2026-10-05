@@ -230,8 +230,7 @@ export default function NovoCandidato() {
                         <h1 id="titulo-cadastro">Novo candidato</h1>
 
                         <p>
-                            Preencha os dados abaixo. Os campos com{" "}
-                            <span aria-hidden="true">*</span> são obrigatórios.
+                            Preencha os dados abaixo conforme informações do empregado.
                         </p>
                     </div>
 

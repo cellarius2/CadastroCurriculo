@@ -144,7 +144,7 @@ O comando aplica as migrations existentes e cria a estrutura do banco. Não é n
 Na pasta principal:
 
 ```powershell
-dotnet run --project backend/CadastroCurriculos.API/CadastroCurriculos.API.csproj --launch-profile http --urls http://localhost:5080
+dotnet run --project backend/CadastroCurriculos.API/CadastroCurriculos.API.csproj --launch-profile http
 ```
 
 A API estará disponível em:
@@ -170,7 +170,7 @@ cd frontend
 npm ci
 ```
 
-Crie o arquivo `.env.example` em `frontend/` com:
+O arquivo `.env.example` já está incluído em `frontend/` com:
 
 ```dotenv
 VITE_API_URL=http://localhost:5080

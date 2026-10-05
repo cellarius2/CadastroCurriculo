@@ -2,7 +2,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UglyToad.PdfPig;
 using UglyToad.PdfPig.DocumentLayoutAnalysis.TextExtractor;
-using CadastroCurriculos.API.Services;
 
 namespace CadastroCurriculos.API.Services;
 
